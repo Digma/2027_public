@@ -20,32 +20,45 @@ summary{cursor:pointer;list-style:none}
 summary::-webkit-details-marker{display:none}
 input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
 ::selection{background:#E9F493;color:#0B0B0B}
+@media (max-width:640px){
+  nav{flex-wrap:nowrap !important;gap:8px !important}
+  nav [data-nav-toggle]{display:inline-flex !important}
+  nav [data-nav-links]{display:none !important}
+  nav [data-nav-links][data-open="true"]{display:flex !important;position:absolute;top:100%;left:0;right:0;flex-direction:column !important;align-items:flex-end !important;gap:0 !important;background:#0B0B0B;border-bottom:3px solid #fff;padding:4px 8px 10px}
+  nav [data-nav-links][data-open="true"] a{width:100%;justify-content:flex-end !important;text-align:right;border-top:1px solid #333}
+  section,header>div,footer,nav{padding-left:8px !important;padding-right:8px !important}
+  [data-day-row]{grid-template-columns:minmax(0,1fr) !important;gap:8px !important}
+  [data-day-row]>div:first-child{display:flex;align-items:baseline;gap:12px}
+}
 </style>
 <template id="__bundler_thumbnail" data-bg-color="#0B0B0B">
-<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0B0B0B"/><rect x="330" y="250" width="240" height="300" rx="120" fill="#5B2FD1"/><rect x="630" y="250" width="240" height="300" rx="20" fill="#E9F493"/><text x="600" y="180" font-family="Impact,sans-serif" font-size="150" fill="#ffffff" text-anchor="middle">C &amp; G</text><text x="600" y="680" font-family="monospace" font-size="60" fill="#E9F493" text-anchor="middle">14–17.05.27</text></svg>
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#0B0B0B"></rect><rect x="330" y="250" width="240" height="300" rx="120" fill="#5B2FD1"></rect><rect x="630" y="250" width="240" height="300" rx="20" fill="#E9F493"></rect><text x="600" y="180" font-family="Impact,sans-serif" font-size="150" fill="#ffffff" text-anchor="middle">C &amp; G</text><text x="600" y="680" font-family="monospace" font-size="60" fill="#E9F493" text-anchor="middle">14–17.05.27</text></svg>
 </template>
 </helmet>
 
 <div style="max-width:1600px;margin:0 auto;background:#fff">
 
-<nav style="position:sticky;top:0;z-index:50;background:#0B0B0B;color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 16px;padding:4px 14px;border-bottom:3px solid #fff">
-  <a href="#top" style="font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.04em;color:#fff;text-transform:uppercase;white-space:nowrap">Clara &amp; Gaël</a>
-  <div style="display:flex;align-items:center;gap:2px 16px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase">
-    <a href="#programme" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Programme</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Program</sc-if></a>
-    <a href="#venir" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Y venir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Getting there</sc-if></a>
-    <a href="#dormir" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dormir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Stay</sc-if></a>
-    <a href="#look" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dress code</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Dress code</sc-if></a>
-    <a href="#faq" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493">FAQ</a>
+<nav style="position:sticky;top:0;z-index:50;background:#0B0B0B;isolation:isolate;color:#fff;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2px 16px;padding:4px 8px;border-bottom:3px solid #fff">
+  <a href="#top" style="font-family:Anton,Impact,sans-serif;font-size:20px;letter-spacing:.04em;color:#fff;text-transform:uppercase;white-space:nowrap">C&amp;G</a>
+  <div style="display:flex;align-items:center;gap:2px 14px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase">
+    <div data-nav-links="" data-open="{{ menuOpen }}" onClick="{{ closeMenu }}" style="display:flex;align-items:center;gap:2px 14px;flex-wrap:wrap">
+      <a href="#programme" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Programme</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Program</sc-if></a>
+      <a href="#venir" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Y venir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Getting there</sc-if></a>
+      <a href="#dormir" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dormir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Stay</sc-if></a>
+      <a href="#look" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dress code</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Dress code</sc-if></a>
+      <a href="#faq" style="color:#fff;display:inline-flex;align-items:center;min-height:44px;padding:6px 2px" style-hover="color:#E9F493">FAQ</a>
+    </div>
+    <button type="button" data-nav-toggle="" onClick="{{ toggleMenu }}" aria-label="Menu" style="display:none;align-items:center;justify-content:center;width:38px;height:36px;background:transparent;border:2px solid #fff;color:#fff;font-family:Anton,Impact,sans-serif;font-size:20px;line-height:1;cursor:pointer">{{ menuIcon }}</button>
     <div style="display:flex;align-items:center;gap:6px">
       <button type="button" onClick="{{ setFr }}" style="{{ frBtn }}">FR</button>
       <button type="button" onClick="{{ enBtn2 }}" style="{{ enBtn }}">EN</button>
     </div>
-    <a href="#rsvp" style="background:#E9F493;color:#0B0B0B;padding:9px 16px;font-weight:700;letter-spacing:.14em" style-hover="background:#fff">RSVP</a>
+    <a href="#rsvp" style="background:#E9F493;color:#0B0B0B;padding:9px 14px;font-weight:700;letter-spacing:.14em" style-hover="background:#fff">RSVP</a>
   </div>
 </nav>
 
 <header id="top" style="background:#0B0B0B;padding:0 0 4px">
-  <div style="padding:44px 18px 10px">
+  <div style="padding:44px 8px 10px">
     <h1 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(44px,11.6vw,196px);line-height:.98;letter-spacing:-.015em;color:#fff;text-transform:uppercase">Clara &amp; Gaël</h1>
   </div>
 
@@ -68,60 +81,60 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     </div>
   </div>
 
-  <div style="padding:10px 18px 20px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px">
+  <div style="padding:10px 8px 20px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px">
     <h2 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(40px,10.4vw,178px);line-height:.84;letter-spacing:-.01em;color:#fff;text-transform:uppercase">Montolieu<br><span style="color:#E9F493">14–17.05.27</span></h2>
-    <p style="margin:0 0 10px;max-width:340px;font-family:'Space Mono',monospace;font-size:12px;line-height:1.7;letter-spacing:.04em;color:#fff;text-transform:uppercase">
+    <p style="margin:0 0 10px;max-width:340px;font-family:'Space Mono',monospace;font-size:clamp(13px,1.1vw,12px);line-height:1.7;letter-spacing:.04em;color:#fff;text-transform:uppercase">
       <sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Aude · Occitanie · France<br>Week-end de Pentecôte<br>(oui, lundi est férié)</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Aude · Occitanie · France<br>Pentecost weekend<br>(yes, Monday is a holiday)</sc-if>
     </p>
   </div>
 </header>
 
-<section id="programme" style="padding:56px 18px 8px">
+<section id="programme" style="padding:56px 8px 8px">
   <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:4px solid #0B0B0B;padding-bottom:10px">
     <h2 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8vw,120px);line-height:.9;letter-spacing:-.01em;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le programme</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The program</sc-if></h2>
     <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#5B2FD1"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">trois jours, zéro pression</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">three days, zero pressure</sc-if></span>
   </div>
 
   <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:0">
-    <div style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
+    <div data-day-row="" style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
       <div>
         <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,10vw,150px);line-height:.8;color:#5B2FD1">14</div>
         <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Vendredi</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Friday</sc-if></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(26px,4.4vw,62px);line-height:.95;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Apéro au Musée Cérès Franco</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Welcome drinks at Musée Cérès Franco</sc-if></h3>
-        <p style="margin:0;max-width:62ch;font-size:clamp(15px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Soirée d'ouverture au milieu des toiles de la collection Cérès Franco. Verres, tapas, retrouvailles. Arrivez quand vous pouvez — on est là toute la soirée.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Opening night among the paintings of the Cérès Franco collection. Drinks, tapas, hellos. Come whenever you land — we're there all evening.</sc-if></p>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#5B2FD1"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Soir · Musée Cérès Franco, Montolieu · tenue libre</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Evening · Musée Cérès Franco, Montolieu · come as you are</sc-if></div>
+        <p style="margin:0;max-width:62ch;font-size:clamp(17px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Soirée d'ouverture au milieu des toiles de la collection Cérès Franco. Verres, tapas, retrouvailles. Arrivez quand vous pouvez — on est là toute la soirée.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Opening night among the paintings of the Cérès Franco collection. Drinks, tapas, hellos. Come whenever you land — we're there all evening.</sc-if></p>
+        <div style="font-family:'Space Mono',monospace;font-size:clamp(12px,1.1vw,11px);letter-spacing:.12em;text-transform:uppercase;color:#5B2FD1"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Soir · Musée Cérès Franco, Montolieu · tenue libre</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Evening · Musée Cérès Franco, Montolieu · come as you are</sc-if></div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
+    <div data-day-row="" style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
       <div>
         <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,10vw,150px);line-height:.8;color:#C63BB4">15</div>
         <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Samedi</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Saturday</sc-if></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(26px,4.4vw,62px);line-height:.95;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le mariage · Saint-Roch, puis la Manufacture</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The wedding · Saint-Roch, then the Manufacture</sc-if></h3>
-        <p style="margin:0;max-width:62ch;font-size:clamp(15px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Cérémonie à la chapelle Saint-Roch, sur la colline au-dessus du village. Ensuite tout le monde descend à la Manufacture Royale : dîner, discours qu'on n'a pas relus, danse jusqu'à tard.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Ceremony at the Saint-Roch chapel, on the hill above the village. Then everyone heads down to the Manufacture Royale: dinner, unrehearsed speeches, dancing until late.</sc-if></p>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C63BB4"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Après-midi &amp; soirée · Saint-Roch → Manufacture Royale · le grand jour</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Afternoon &amp; evening · Saint-Roch → Manufacture Royale · the big one</sc-if></div>
+        <p style="margin:0;max-width:62ch;font-size:clamp(17px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Cérémonie à la chapelle Saint-Roch, sur la colline au-dessus du village. Ensuite tout le monde descend à la Manufacture Royale : dîner, discours qu'on n'a pas relus, danse jusqu'à tard.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Ceremony at the Saint-Roch chapel, on the hill above the village. Then everyone heads down to the Manufacture Royale: dinner, unrehearsed speeches, dancing until late.</sc-if></p>
+        <div style="font-family:'Space Mono',monospace;font-size:clamp(12px,1.1vw,11px);letter-spacing:.12em;text-transform:uppercase;color:#C63BB4"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Après-midi &amp; soirée · Saint-Roch → Manufacture Royale · le grand jour</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Afternoon &amp; evening · Saint-Roch → Manufacture Royale · the big one</sc-if></div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
+    <div data-day-row="" style="display:grid;grid-template-columns:clamp(90px,14vw,210px) minmax(0,1fr);gap:clamp(14px,3vw,44px);padding:26px 0;border-bottom:2px solid #0B0B0B;align-items:start">
       <div>
         <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,10vw,150px);line-height:.8;color:#F4671F">16</div>
         <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-top:6px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dimanche</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sunday</sc-if></div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(26px,4.4vw,62px);line-height:.95;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Paella à la Manufacture Royale</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Paella at the Manufacture Royale</sc-if></h3>
-        <p style="margin:0;max-width:62ch;font-size:clamp(15px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Grande paella dehors, à l'ombre, sans horaire précis. Lundi est férié : restez, dormez, baignez-vous, repartez quand vous voulez.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">A big paella outside, in the shade, on no particular schedule. Monday is a public holiday: stay, sleep in, swim, leave whenever.</sc-if></p>
-        <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#F4671F"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Midi &amp; après-midi · Manufacture Royale · lunettes de soleil obligatoires</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Noon &amp; afternoon · Manufacture Royale · sunglasses mandatory</sc-if></div>
+        <p style="margin:0;max-width:62ch;font-size:clamp(17px,1.3vw,19px);line-height:1.5;text-wrap:pretty;color:#2A2A2A"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Grande paella dehors, à l'ombre, sans horaire précis. Lundi est férié : restez, dormez, baignez-vous, repartez quand vous voulez.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">A big paella outside, in the shade, on no particular schedule. Monday is a public holiday: stay, sleep in, swim, leave whenever.</sc-if></p>
+        <div style="font-family:'Space Mono',monospace;font-size:clamp(12px,1.1vw,11px);letter-spacing:.12em;text-transform:uppercase;color:#F4671F"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Midi &amp; après-midi · Manufacture Royale · lunettes de soleil obligatoires</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Noon &amp; afternoon · Manufacture Royale · sunglasses mandatory</sc-if></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="venir" style="margin-top:48px;background:#0B0B0B;color:#fff;padding:44px 18px 52px">
+<section id="venir" style="margin-top:48px;background:#0B0B0B;color:#fff;padding:44px 8px 52px">
   <h2 style="margin:0 0 4px;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8.6vw,132px);line-height:.88;letter-spacing:-.01em;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Comment y venir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Getting there</sc-if></h2>
   <p style="margin:0 0 30px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Montolieu, Aude · 20 min de Carcassonne</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu, Aude · 20 min from Carcassonne</sc-if></p>
 
@@ -129,31 +142,31 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     <div style="background:#0B0B0B;padding:22px 20px 26px;display:flex;flex-direction:column;gap:10px">
       <div style="font-family:Anton,Impact,sans-serif;font-size:56px;line-height:.8;color:#5B2FD1">01</div>
       <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En voiture</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">By car</sc-if></h3>
-      <p style="margin:0;font-size:15.5px;line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le plus simple. A61 jusqu'à Carcassonne, puis 20 min de petites routes. Parking sur place et dans le village.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The easiest option. A61 to Carcassonne, then 20 min of country roads. Parking at the venue and in the village.</sc-if></p>
+      <p style="margin:0;font-size:clamp(16.5px,1.2vw,15.5px);line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le plus simple. A61 jusqu'à Carcassonne, puis 20 min de petites routes. Parking sur place et dans le village.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The easiest option. A61 to Carcassonne, then 20 min of country roads. Parking at the venue and in the village.</sc-if></p>
     </div>
     <div style="background:#0B0B0B;padding:22px 20px 26px;display:flex;flex-direction:column;gap:10px">
       <div style="font-family:Anton,Impact,sans-serif;font-size:56px;line-height:.8;color:#C63BB4">02</div>
       <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En train</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">By train</sc-if></h3>
-      <p style="margin:0;font-size:15.5px;line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Gare de Carcassonne (TGV / Intercités), puis 25 min de route. Dites-nous votre horaire d'arrivée, on organise le reste.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Carcassonne station (TGV / Intercités), then a 25 min drive. Tell us your arrival time and we'll sort the rest.</sc-if></p>
+      <p style="margin:0;font-size:clamp(16.5px,1.2vw,15.5px);line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Gare de Carcassonne (TGV / Intercités), puis 25 min de route. Dites-nous votre horaire d'arrivée, on organise le reste.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Carcassonne station (TGV / Intercités), then a 25 min drive. Tell us your arrival time and we'll sort the rest.</sc-if></p>
     </div>
     <div style="background:#0B0B0B;padding:22px 20px 26px;display:flex;flex-direction:column;gap:10px">
       <div style="font-family:Anton,Impact,sans-serif;font-size:56px;line-height:.8;color:#F4671F">03</div>
       <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En avion</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">By plane</sc-if></h3>
-      <p style="margin:0;font-size:15.5px;line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Toulouse-Blagnac (1h15 de route) ou Carcassonne-Salvaza (25 min). Ensuite train ou voiture de location.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Toulouse-Blagnac (1h15 drive) or Carcassonne-Salvaza (25 min). Then train or a rental car.</sc-if></p>
+      <p style="margin:0;font-size:clamp(16.5px,1.2vw,15.5px);line-height:1.55;color:#D8D8D8;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Toulouse-Blagnac (1h15 de route) ou Carcassonne-Salvaza (25 min). Ensuite train ou voiture de location.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Toulouse-Blagnac (1h15 drive) or Carcassonne-Salvaza (25 min). Then train or a rental car.</sc-if></p>
     </div>
     <div style="background:#E9F493;color:#0B0B0B;padding:22px 20px 26px;display:flex;flex-direction:column;gap:10px">
       <div style="font-family:Anton,Impact,sans-serif;font-size:56px;line-height:.8;color:#0B0B0B">04</div>
       <h3 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Sans voiture ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">No car?</sc-if></h3>
-      <p style="margin:0;font-size:15.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Pas de panique : on peut arranger un transport depuis Carcassonne et entre les lieux. Cochez la case dans le RSVP.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Don't worry: we can arrange transport from Carcassonne and between venues. Just tick the box in the RSVP.</sc-if></p>
+      <p style="margin:0;font-size:clamp(16.5px,1.2vw,15.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Pas de panique : on peut arranger un transport depuis Carcassonne et entre les lieux. Cochez la case dans le RSVP.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Don't worry: we can arrange transport from Carcassonne and between venues. Just tick the box in the RSVP.</sc-if></p>
     </div>
   </div>
 </section>
 
-<section id="dormir" style="padding:52px 18px 8px">
+<section id="dormir" style="padding:52px 8px 8px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(18px,3vw,44px);align-items:start">
     <div>
       <h2 style="margin:0 0 16px;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8vw,124px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Où dormir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Where to stay</sc-if></h2>
-      <p style="margin:0 0 18px;max-width:52ch;font-size:clamp(16px,1.4vw,20px);line-height:1.5;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Montolieu est un village de 800 habitants et de 15 librairies : gîtes, chambres d'hôtes et maisons entières, souvent à pied des lieux de fête. Réservez tôt — le week-end de Pentecôte part vite.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu is a village of 800 people and 15 bookshops: gîtes, B&amp;Bs and whole houses, most within walking distance of the party. Book early — Pentecost weekend fills up fast.</sc-if></p>
+      <p style="margin:0 0 18px;max-width:52ch;font-size:clamp(17.5px,1.4vw,20px);line-height:1.5;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Montolieu est un village de 800 habitants et de 15 librairies : gîtes, chambres d'hôtes et maisons entières, souvent à pied des lieux de fête. Réservez tôt — le week-end de Pentecôte part vite.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu is a village of 800 people and 15 bookshops: gîtes, B&amp;Bs and whole houses, most within walking distance of the party. Book early — Pentecost weekend fills up fast.</sc-if></p>
       <a href="https://www.montolieu.fr/bien-vivre-a-montolieu/hebergements/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:12px;background:#0B0B0B;color:#fff;padding:16px 22px;font-family:Anton,Impact,sans-serif;font-size:clamp(18px,2vw,28px);text-transform:uppercase;letter-spacing:.01em" style-hover="background:#5B2FD1;color:#fff"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Hébergements à Montolieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Places to stay in Montolieu</sc-if><span style="font-family:'Space Mono',monospace;font-size:12px;color:#E9F493">↗</span></a>
       <ul style="margin:22px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5B2FD1">
         <li style="border-top:2px solid #0B0B0B;padding-top:10px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Village · à pied de tout</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Village · walk everywhere</sc-if></li>
@@ -172,18 +185,18 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
   </div>
 </section>
 
-<section id="look" style="margin-top:48px;background:#E9F493;padding:44px 18px 50px">
+<section id="look" style="margin-top:48px;background:#E9F493;padding:44px 8px 50px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(18px,3vw,48px);align-items:start">
     <h2 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8vw,124px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dress code</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Dress code</sc-if></h2>
     <div style="display:flex;flex-direction:column;gap:16px">
       <p style="margin:0;font-family:Anton,Impact,sans-serif;font-size:clamp(24px,3.4vw,44px);line-height:1;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Endimanché, pas guindé.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Dressed up, not stiff.</sc-if></p>
-      <p style="margin:0;max-width:56ch;font-size:clamp(16px,1.3vw,19px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Couleurs très bienvenues. Mi-mai dans l'Aude : chaud le jour, frais dès la nuit tombée — prenez une veste. Le village est en pavés et la chapelle est en haut d'une colline : les talons aiguilles vont perdre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Colour very welcome. Mid-May in the Aude: hot by day, cool once the sun drops — bring a jacket. The village is cobbled and the chapel sits on a hill: stilettos will lose.</sc-if></p>
+      <p style="margin:0;max-width:56ch;font-size:clamp(17.5px,1.3vw,19px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Couleurs très bienvenues. Mi-mai dans l'Aude : chaud le jour, frais dès la nuit tombée — prenez une veste. Le village est en pavés et la chapelle est en haut d'une colline : les talons aiguilles vont perdre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Colour very welcome. Mid-May in the Aude: hot by day, cool once the sun drops — bring a jacket. The village is cobbled and the chapel sits on a hill: stilettos will lose.</sc-if></p>
       <div style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;border-top:2px solid #0B0B0B;padding-top:12px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Oui : lin, couleur, chapeau · Non : blanc intégral, talons fins</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Yes: linen, colour, a hat · No: all-white, thin heels</sc-if></div>
     </div>
   </div>
 </section>
 
-<section id="photos" style="padding:52px 18px 8px">
+<section id="photos" style="padding:52px 8px 8px">
   <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px">
     <h2 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8vw,124px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Photos</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Photos</sc-if></h2>
     <span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#5B2FD1"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">les photos du week-end arriveront ici</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">photos from the weekend will land here</sc-if></span>
@@ -198,12 +211,12 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
   </div>
 </section>
 
-<section id="rsvp" style="margin-top:48px;background:#5B2FD1;color:#fff;padding:46px 18px 54px">
+<section id="rsvp" style="margin-top:48px;background:#5B2FD1;color:#fff;padding:46px 8px 54px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,4vw,56px);align-items:start">
     <div>
       <h2 style="margin:0 0 14px;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8.6vw,132px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase">RSVP</h2>
-      <p style="margin:0 0 12px;max-width:44ch;font-size:clamp(16px,1.4vw,20px);line-height:1.5;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Répondez avant le 1er février 2027, qu'on sache combien de paellas commander.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Please reply before 1 February 2027, so we know how much paella to order.</sc-if></p>
-      <p style="margin:0;font-family:'Space Mono',monospace;font-size:12px;line-height:1.7;letter-spacing:.08em;text-transform:uppercase;color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Une question ? info@claraetgael.love</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Any question? info@claraetgael.love</sc-if></p>
+      <p style="margin:0 0 12px;max-width:44ch;font-size:clamp(17.5px,1.4vw,20px);line-height:1.5;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Répondez avant le 1er février 2027, qu'on sache combien de paellas commander.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Please reply before 1 February 2027, so we know how much paella to order.</sc-if></p>
+      <p style="margin:0;font-family:'Space Mono',monospace;font-size:clamp(13px,1.1vw,12px);line-height:1.7;letter-spacing:.08em;text-transform:uppercase;color:#E9F493"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Une question ? info@claraetgael.love</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Any question? info@claraetgael.love</sc-if></p>
     </div>
     <form onSubmit="{{ onSubmit }}" style="display:flex;flex-direction:column;gap:14px;background:#0B0B0B;padding:22px 20px 26px">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px">
@@ -224,35 +237,35 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
   </div>
 </section>
 
-<section id="faq" style="padding:52px 18px 60px">
+<section id="faq" style="padding:52px 8px 60px">
   <h2 style="margin:0 0 22px;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(38px,8vw,124px);line-height:.86;letter-spacing:-.01em;text-transform:uppercase">FAQ</h2>
   <div style="display:flex;flex-direction:column;gap:0;border-top:4px solid #0B0B0B">
     <details style="border-bottom:2px solid #0B0B0B;padding:16px 0">
       <summary style="font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase;display:flex;justify-content:space-between;gap:16px" style-hover="color:#5B2FD1"><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Les enfants sont-ils invités ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Are kids invited?</sc-if></span><span style="color:#5B2FD1">+</span></summary>
-      <p style="margin:12px 0 0;max-width:62ch;font-size:16.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Oui, avec plaisir. Dites-nous leur âge dans le RSVP : on prévoit un coin pour eux samedi soir.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Yes, gladly. Tell us their ages in the RSVP — we'll set up a corner for them on Saturday night.</sc-if></p>
+      <p style="margin:12px 0 0;max-width:62ch;font-size:clamp(17px,1.2vw,16.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Oui, avec plaisir. Dites-nous leur âge dans le RSVP : on prévoit un coin pour eux samedi soir.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Yes, gladly. Tell us their ages in the RSVP — we'll set up a corner for them on Saturday night.</sc-if></p>
     </details>
     <details style="border-bottom:2px solid #0B0B0B;padding:16px 0">
       <summary style="font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase;display:flex;justify-content:space-between;gap:16px" style-hover="color:#5B2FD1"><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Et les cadeaux ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">What about gifts?</sc-if></span><span style="color:#5B2FD1">+</span></summary>
-      <p style="margin:12px 0 0;max-width:62ch;font-size:16.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Votre présence suffit largement. Si vous insistez, il y aura une cagnotte pour le voyage — le lien arrivera plus tard.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Your presence is plenty. If you insist, there'll be a honeymoon fund — link to come later.</sc-if></p>
+      <p style="margin:12px 0 0;max-width:62ch;font-size:clamp(17px,1.2vw,16.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Votre présence suffit largement. Si vous insistez, il y aura une cagnotte pour le voyage — le lien arrivera plus tard.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Your presence is plenty. If you insist, there'll be a honeymoon fund — link to come later.</sc-if></p>
     </details>
     <details style="border-bottom:2px solid #0B0B0B;padding:16px 0">
       <summary style="font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase;display:flex;justify-content:space-between;gap:16px" style-hover="color:#5B2FD1"><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Quel temps fait-il en mai ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">What's the weather like in May?</sc-if></span><span style="color:#5B2FD1">+</span></summary>
-      <p style="margin:12px 0 0;max-width:62ch;font-size:16.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En général 22–27 °C, du soleil, parfois du vent (le Cers). Les soirées descendent vers 13 °C : une couche en plus, toujours.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Usually 22–27 °C, sunny, occasionally windy (the Cers). Evenings drop to around 13 °C — bring a layer.</sc-if></p>
+      <p style="margin:12px 0 0;max-width:62ch;font-size:clamp(17px,1.2vw,16.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En général 22–27 °C, du soleil, parfois du vent (le Cers). Les soirées descendent vers 13 °C : une couche en plus, toujours.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Usually 22–27 °C, sunny, occasionally windy (the Cers). Evenings drop to around 13 °C — bring a layer.</sc-if></p>
     </details>
     <details style="border-bottom:2px solid #0B0B0B;padding:16px 0">
       <summary style="font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase;display:flex;justify-content:space-between;gap:16px" style-hover="color:#5B2FD1"><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Que faire sur place avant / après ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Anything to do before / after?</sc-if></span><span style="color:#5B2FD1">+</span></summary>
-      <p style="margin:12px 0 0;max-width:62ch;font-size:16.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Montolieu est le village du livre : librairies, ateliers, sentiers vers les capitelles. À côté : la cité de Carcassonne, le canal du Midi, l'abbaye de Villelongue, les Corbières.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu is the village of books: bookshops, workshops, trails out to the dry-stone capitelles. Nearby: the Carcassonne citadel, the Canal du Midi, Villelongue abbey, the Corbières vineyards.</sc-if></p>
+      <p style="margin:12px 0 0;max-width:62ch;font-size:clamp(17px,1.2vw,16.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Montolieu est le village du livre : librairies, ateliers, sentiers vers les capitelles. À côté : la cité de Carcassonne, le canal du Midi, l'abbaye de Villelongue, les Corbières.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu is the village of books: bookshops, workshops, trails out to the dry-stone capitelles. Nearby: the Carcassonne citadel, the Canal du Midi, Villelongue abbey, the Corbières vineyards.</sc-if></p>
     </details>
     <details style="border-bottom:2px solid #0B0B0B;padding:16px 0">
       <summary style="font-family:Anton,Impact,sans-serif;font-size:clamp(20px,2.6vw,32px);text-transform:uppercase;display:flex;justify-content:space-between;gap:16px" style-hover="color:#5B2FD1"><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Je ne parle pas français, ça va aller ?</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">I don't speak French — will I survive?</sc-if></span><span style="color:#5B2FD1">+</span></summary>
-      <p style="margin:12px 0 0;max-width:62ch;font-size:16.5px;line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le week-end sera bilingue, et tout le monde se comprend après le deuxième verre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The weekend runs in both languages, and everyone understands each other after the second glass.</sc-if></p>
+      <p style="margin:12px 0 0;max-width:62ch;font-size:clamp(17px,1.2vw,16.5px);line-height:1.55;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le week-end sera bilingue, et tout le monde se comprend après le deuxième verre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The weekend runs in both languages, and everyone understands each other after the second glass.</sc-if></p>
     </details>
   </div>
 </section>
 
-<footer style="background:#0B0B0B;color:#fff;padding:26px 18px 34px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
+<footer style="background:#0B0B0B;color:#fff;padding:26px 8px 34px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
   <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(32px,7vw,110px);line-height:.86;text-transform:uppercase">Clara &amp; Gaël<br><span style="color:#E9F493">Montolieu 14–17.05.27</span></div>
-  <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8E8E8E"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">À très vite dans l'Aude</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">See you in the Aude</sc-if></div>
+  <div style="font-family:'Space Mono',monospace;font-size:clamp(12px,1.1vw,11px);letter-spacing:.12em;text-transform:uppercase;color:#8E8E8E"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">À très vite dans l'Aude</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">See you in the Aude</sc-if></div>
 </footer>
 
 </div>
@@ -261,7 +274,7 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { lang: props.startLang === "en" ? "en" : "fr", sent: false };
+    this.state = { lang: props.startLang === "en" ? "en" : "fr", sent: false, menu: false };
   }
   btn(active) {
     return {
@@ -288,6 +301,10 @@ class Component extends DCLogic {
       enBtn: this.btn(!fr),
       setFr: () => this.setState({ lang: "fr" }),
       enBtn2: () => this.setState({ lang: "en" }),
+      menuOpen: this.state.menu ? "true" : "false",
+      menuIcon: this.state.menu ? "×" : "+",
+      toggleMenu: () => this.setState((s) => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
       sent: this.state.sent,
       sentMsg: fr ? "Merci ! (démo — rien n'est encore envoyé)" : "Thanks! (demo — nothing is sent yet)",
       onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
