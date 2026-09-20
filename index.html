@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -316,22 +317,59 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Formulaire de réponse</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Reply form</sc-if></span>
         <span style="opacity:.75">2 min</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
-        <label style="min-width:0;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Nom(s)</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Name(s)</sc-if><input type="text" size="6" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)"></label>
-        <label style="min-width:0;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)">Email<input type="email" size="6" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)"></label>
-      </div>
-      <fieldset style="border:none;border-top:1px solid var(--rule);padding:14px 0 0;margin:0;display:flex;flex-direction:column;gap:2px">
-        <legend style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding:0 8px 0 0"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Je serai là</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">I'll be there</sc-if></legend>
-        <label style="display:flex;align-items:center;gap:14px;padding:10px 0;min-height:44px;font-size:16px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ven. 14 — apéro au musée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fri 14 — drinks at the museum</sc-if></label>
-        <label style="display:flex;align-items:center;gap:14px;padding:10px 0;min-height:44px;font-size:16px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Sam. 15 — le mariage</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sat 15 — the wedding</sc-if></label>
-        <label style="display:flex;align-items:center;gap:14px;padding:10px 0;min-height:44px;font-size:16px;cursor:pointer"><input type="checkbox" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dim. 16 — la paella</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sun 16 — the paella</sc-if></label>
-        <label style="display:flex;align-items:center;gap:14px;padding:10px 0;min-height:44px;font-size:16px;cursor:pointer;color:var(--violet)"><input type="checkbox" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">J'ai besoin d'un transport</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">I need transport</sc-if></label>
-      </fieldset>
-      <label style="display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);border-top:1px solid var(--rule);padding-top:14px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Régime, allergies, chanson à passer</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Diet, allergies, song request</sc-if><textarea rows="3" style="background:rgba(91,47,209,.06);border:1px solid var(--violet);color:var(--ink);padding:12px;font-size:16px;resize:vertical" style-focus="outline:none;background:rgba(91,47,209,.12)"></textarea></label>
-      <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-        <button type="submit" style="background:var(--violet);color:#fff;border:none;padding:0 28px;min-height:48px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Envoyer</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Send</sc-if></button>
-        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet)">{{ sentMsg }}</p></sc-if>
-      </div>
+      <sc-if value="{{ !token }}">
+        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ce formulaire utilise un lien personnel. Merci d'utiliser le lien reçu par email pour répondre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">This form needs your personal invite link. Please use the link sent to you by email to reply.</sc-if></p>
+      </sc-if>
+      <sc-if value="{{ token }}">
+        <sc-if value="{{ loading }}">
+          <p style="margin:0;font-size:15px;color:var(--dim)">{{ loadingMsg }}</p>
+        </sc-if>
+        <sc-if value="{{ !loading }}">
+          <sc-if value="{{ notFound }}">
+            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--dim)">{{ notFoundMsg }}</p>
+          </sc-if>
+          <sc-if value="{{ !notFound }}">
+            <sc-for list="{{ guests }}" as="item">
+              <fieldset style="border:none;border-top:1px solid var(--rule);padding:14px 0 0;margin:0;display:flex;flex-direction:column;gap:12px">
+                <legend style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);padding:0 8px 0 0">{{ item.legend }}</legend>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:14px">
+                  <label style="min-width:0;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Prénom</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">First name</sc-if><input type="text" value="{{ item.first_name }}" onChange="{{ item.onFirstName }}" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)"></label>
+                  <label style="min-width:0;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Nom</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Last name</sc-if><input type="text" value="{{ item.last_name }}" onChange="{{ item.onLastName }}" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)"></label>
+                  <label style="min-width:0;display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Téléphone</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Phone</sc-if><input type="tel" value="{{ item.phone }}" onChange="{{ item.onPhone }}" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)"></label>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:2px">
+                  <sc-if value="{{ invitedApero }}">
+                    <label style="display:flex;align-items:center;gap:14px;padding:8px 0;min-height:40px;font-size:16px;cursor:pointer"><input type="checkbox" checked="{{ item.apero }}" onChange="{{ item.onApero }}" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ven. 14 — apéro au musée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fri 14 — drinks at the museum</sc-if></label>
+                  </sc-if>
+                  <sc-if value="{{ invitedWedding }}">
+                    <label style="display:flex;align-items:center;gap:14px;padding:8px 0;min-height:40px;font-size:16px;cursor:pointer"><input type="checkbox" checked="{{ item.wedding }}" onChange="{{ item.onWedding }}" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Sam. 15 — le mariage</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sat 15 — the wedding</sc-if></label>
+                  </sc-if>
+                  <sc-if value="{{ invitedPaella }}">
+                    <label style="display:flex;align-items:center;gap:14px;padding:8px 0;min-height:40px;font-size:16px;cursor:pointer"><input type="checkbox" checked="{{ item.paella }}" onChange="{{ item.onPaella }}" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dim. 16 — la paella</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sun 16 — the paella</sc-if></label>
+                  </sc-if>
+                </div>
+                <label style="display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Régime, allergies</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Diet, allergies</sc-if><textarea rows="2" value="{{ item.dietary }}" onChange="{{ item.onDietary }}" style="background:rgba(91,47,209,.06);border:1px solid var(--violet);color:var(--ink);padding:12px;font-size:16px;resize:vertical" style-focus="outline:none;background:rgba(91,47,209,.12)"></textarea></label>
+                <label style="display:flex;align-items:center;gap:14px;padding:6px 0;min-height:40px;font-size:16px;cursor:pointer;color:var(--violet)"><input type="checkbox" checked="{{ item.bringing_kids }}" onChange="{{ item.onBringingKids }}" style="width:20px;height:20px;flex:none;accent-color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Je voudrais amener mes enfants — contactez-moi</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">I'd like to bring my kids — contact me</sc-if></label>
+                <sc-if value="{{ item.bringing_kids }}">
+                  <input type="text" value="{{ item.kids_note }}" onChange="{{ item.onKidsNote }}" placeholder="{{ item.kidsPlaceholder }}" style="width:100%;min-width:0;background:rgba(91,47,209,.06);border:none;border-bottom:1.5px solid var(--violet);color:var(--ink);padding:10px;font-size:16px" style-focus="outline:none;background:rgba(91,47,209,.12)">
+                </sc-if>
+                <sc-if value="{{ item.canRemove }}">
+                  <button type="button" onClick="{{ item.onRemove }}" style="align-self:flex-start;background:transparent;border:none;color:var(--dim);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:underline;cursor:pointer;padding:0"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Retirer ce +1</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Remove this +1</sc-if></button>
+                </sc-if>
+              </fieldset>
+            </sc-for>
+            <sc-if value="{{ canAddPlusOne }}">
+              <button type="button" onClick="{{ onAddPlusOne }}" style="align-self:flex-start;background:transparent;border:1px dashed var(--violet);color:var(--violet);padding:8px 14px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">+ Ajouter mon +1</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">+ Add my +1</sc-if></button>
+            </sc-if>
+            <label style="display:flex;flex-direction:column;gap:8px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);border-top:1px solid var(--rule);padding-top:14px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Chanson à passer, message</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Song request, message</sc-if><textarea rows="3" value="{{ message }}" onChange="{{ onMessageChange }}" style="background:rgba(91,47,209,.06);border:1px solid var(--violet);color:var(--ink);padding:12px;font-size:16px;resize:vertical" style-focus="outline:none;background:rgba(91,47,209,.12)"></textarea></label>
+            <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+              <button type="submit" disabled="{{ saving }}" style="background:var(--violet);color:#fff;border:none;padding:0 28px;min-height:48px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--ink)">{{ saveLabel }}</button>
+              <sc-if value="{{ saved }}"><p style="margin:0;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--violet)">{{ savedMsg }}</p></sc-if>
+              <sc-if value="{{ errorMsg }}"><p style="margin:0;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#c0392b">{{ errorMsg }}</p></sc-if>
+            </div>
+          </sc-if>
+        </sc-if>
+      </sc-if>
     </form>
   </div>
 </section>
@@ -380,10 +418,44 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;startLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fr&quot;,&quot;en&quot;],&quot;default&quot;:&quot;fr&quot;,&quot;tsType&quot;:&quot;'fr' | 'en'&quot;,&quot;section&quot;:&quot;Contenu&quot;},&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;crème&quot;,&quot;blanc&quot;,&quot;encre&quot;],&quot;default&quot;:&quot;crème&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Couleurs&quot;},&quot;hairlines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Mise en page&quot;}}">
+const SUPABASE_URL = "https://glchcmonjduqhwtikpxw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_awCdytBDQMqv0vh6dWJ_Ag__uUvQz5a";
+let _sbClient = null;
+function getSb() {
+  if (!_sbClient && window.supabase) {
+    _sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+  return _sbClient;
+}
+function emptyGuest(isPrimary) {
+  return {
+    id: null,
+    is_primary: isPrimary,
+    first_name: "",
+    last_name: "",
+    phone: "",
+    apero: false,
+    wedding: false,
+    paella: false,
+    dietary: "",
+    bringing_kids: false,
+    kids_note: ""
+  };
+}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { lang: props.startLang === "en" ? "en" : "fr", sent: false };
+    this.state = {
+      lang: props.startLang === "en" ? "en" : "fr",
+      token: null,
+      loading: false,
+      notFound: false,
+      invite: null,
+      guests: [],
+      saving: false,
+      saved: false,
+      errorMsg: null
+    };
   }
   palettes = {
     "crème": { paper: "#EDE4D2", ink: "#141210", dim: "#6B6257", violet: "#5B2FD1" },
@@ -399,8 +471,69 @@ class Component extends DCLogic {
     s.setProperty("--violet", p.violet);
     s.setProperty("--rule", this.props.hairlines === false ? "transparent" : p.ink);
   }
-  componentDidMount() { this.applyTheme(); }
+  componentDidMount() {
+    this.applyTheme();
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("rsvp");
+    if (!token) return;
+    this.setState({ token, loading: true });
+    const sb = getSb();
+    if (!sb) {
+      this.setState({ loading: false, notFound: true });
+      return;
+    }
+    sb.rpc("get_rsvp", { p_token: token }).then(({ data, error }) => {
+      if (error || !data || !data.invite) {
+        this.setState({ loading: false, notFound: true });
+        return;
+      }
+      const guests = data.guests && data.guests.length ? data.guests : [emptyGuest(true)];
+      this.setState({ loading: false, invite: data.invite, guests });
+    }).catch(() => this.setState({ loading: false, notFound: true }));
+  }
   componentDidUpdate() { this.applyTheme(); }
+  updateGuest(idx, field, value) {
+    this.setState((s) => {
+      const guests = s.guests.slice();
+      guests[idx] = { ...guests[idx], [field]: value };
+      return { guests, saved: false };
+    });
+  }
+  addPlusOne() {
+    this.setState((s) => ({ guests: [...s.guests, emptyGuest(false)], saved: false }));
+  }
+  removeGuest(idx) {
+    this.setState((s) => ({ guests: s.guests.filter((_, i) => i !== idx), saved: false }));
+  }
+  updateMessage(value) {
+    this.setState((s) => ({ invite: { ...s.invite, message: value }, saved: false }));
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    const sb = getSb();
+    const { token, guests, invite } = this.state;
+    if (!sb || !token) return;
+    this.setState({ saving: true, saved: false, errorMsg: null });
+    sb.rpc("submit_rsvp", {
+      p_token: token,
+      p_guests: guests,
+      p_message: invite ? invite.message || null : null
+    }).then(({ error }) => {
+      if (error) {
+        this.setState({
+          saving: false,
+          errorMsg: this.state.lang === "fr" ? "Erreur \u2014 merci de r\u00e9essayer." : "Something went wrong \u2014 please retry."
+        });
+        return;
+      }
+      this.setState({ saving: false, saved: true });
+    }).catch(() => {
+      this.setState({
+        saving: false,
+        errorMsg: this.state.lang === "fr" ? "Erreur \u2014 merci de r\u00e9essayer." : "Something went wrong \u2014 please retry."
+      });
+    });
+  }
   langBtn(active) {
     return {
       background: "transparent",
@@ -416,6 +549,24 @@ class Component extends DCLogic {
   }
   renderVals() {
     const fr = this.state.lang === "fr";
+    const { token, loading, notFound, invite, guests, saving, saved, errorMsg } = this.state;
+    const canAddPlusOne = !!(invite && invite.allow_plus_one) && guests.length < 2;
+    const guestVals = guests.map((g, idx) => ({
+      ...g,
+      legend: g.is_primary ? (fr ? "Vous" : "You") : (fr ? "Invité·e (+1)" : "Guest (+1)"),
+      canRemove: !g.is_primary,
+      kidsPlaceholder: fr ? "Âge(s), précisions" : "Age(s), notes",
+      onFirstName: (e) => this.updateGuest(idx, "first_name", e.target.value),
+      onLastName: (e) => this.updateGuest(idx, "last_name", e.target.value),
+      onPhone: (e) => this.updateGuest(idx, "phone", e.target.value),
+      onApero: (e) => this.updateGuest(idx, "apero", e.target.checked),
+      onWedding: (e) => this.updateGuest(idx, "wedding", e.target.checked),
+      onPaella: (e) => this.updateGuest(idx, "paella", e.target.checked),
+      onDietary: (e) => this.updateGuest(idx, "dietary", e.target.value),
+      onBringingKids: (e) => this.updateGuest(idx, "bringing_kids", e.target.checked),
+      onKidsNote: (e) => this.updateGuest(idx, "kids_note", e.target.value),
+      onRemove: () => this.removeGuest(idx)
+    }));
     return {
       fr,
       en: !fr,
@@ -423,9 +574,26 @@ class Component extends DCLogic {
       enBtn: this.langBtn(!fr),
       setFr: () => this.setState({ lang: "fr" }),
       enBtn2: () => this.setState({ lang: "en" }),
-      sent: this.state.sent,
-      sentMsg: fr ? "Merci ! (démo — rien n'est encore envoyé)" : "Thanks! (demo — nothing is sent yet)",
-      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+      token,
+      loading,
+      notFound,
+      invite,
+      guests: guestVals,
+      canAddPlusOne,
+      onAddPlusOne: () => this.addPlusOne(),
+      message: invite ? invite.message || "" : "",
+      onMessageChange: (e) => this.updateMessage(e.target.value),
+      invitedApero: !!(invite && invite.invited_apero),
+      invitedWedding: !!(invite && invite.invited_wedding),
+      invitedPaella: !!(invite && invite.invited_paella),
+      saving,
+      saved,
+      errorMsg,
+      saveLabel: saving ? (fr ? "Envoi…" : "Sending…") : (fr ? "Envoyer" : "Send"),
+      savedMsg: fr ? "Merci, c'est enregistré !" : "Thanks, saved!",
+      loadingMsg: fr ? "Chargement…" : "Loading…",
+      notFoundMsg: fr ? "Lien invalide — contactez-nous." : "Invalid link — please contact us.",
+      onSubmit: (e) => this.handleSubmit(e)
     };
   }
 }
