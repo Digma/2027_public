@@ -107,6 +107,7 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     <span style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)">01</span>
   </div>
 
+  <sc-if value="{{ showApero }}">
   <div data-g12 data-dayrow style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g);border-top:1px solid var(--rule);margin-top:clamp(16px,2.2vw,30px);padding-top:clamp(20px,3vw,40px)">
     <div data-span data-daynum style="grid-column:1 / span 2">
       <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,6.4vw,104px);line-height:.8;color:var(--violet)">14</div>
@@ -134,7 +135,9 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     </div>
     <figcaption style="margin:10px var(--m) 0;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Fig. 2 — Cérès Franco, vue du musée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fig. 2 — Cérès Franco, inside the museum</sc-if></figcaption>
   </figure>
+  </sc-if>
 
+  <sc-if value="{{ showWedding }}">
   <div data-g12 data-dayrow style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g);border-top:1px solid var(--rule);margin-top:clamp(34px,5vw,80px);padding-top:clamp(20px,3vw,40px)">
     <div data-span data-daynum style="grid-column:1 / span 2">
       <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,6.4vw,104px);line-height:.8;color:var(--violet)">15</div>
@@ -161,11 +164,13 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
       <figcaption style="margin-top:10px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Fig. 3 — Chapelle Saint-Roch</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fig. 3 — The Saint-Roch chapel</sc-if></figcaption>
     </div>
   </figure>
+  </sc-if>
 
   <blockquote style="margin:clamp(36px,5.4vw,88px) 0 0;padding:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
     <p style="margin:0;padding:clamp(22px,3vw,44px) 0;max-width:30ch;font-family:'Bodoni Moda',Didot,Georgia,serif;font-style:italic;font-size:clamp(24px,3.6vw,56px);line-height:1.12;text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">On se marie dans un village qui compte plus de librairies que de commerces.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">We are getting married in a village with more bookshops than shops.</sc-if></p>
   </blockquote>
 
+  <sc-if value="{{ showPaella }}">
   <div data-g12 data-dayrow style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g);margin-top:clamp(34px,5vw,80px);padding-top:clamp(4px,1vw,10px)">
     <div data-span data-daynum style="grid-column:1 / span 2">
       <div style="font-family:Anton,Impact,sans-serif;font-size:clamp(52px,6.4vw,104px);line-height:.8;color:var(--violet)">16</div>
@@ -186,6 +191,7 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
       <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Férié</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Public holiday</sc-if></span>
     </div>
   </div>
+  </sc-if>
 </section>
 
 <section id="venir" style="padding:clamp(44px,6.4vw,96px) var(--m) 0">
@@ -551,6 +557,10 @@ class Component extends DCLogic {
     const fr = this.state.lang === "fr";
     const { token, loading, notFound, invite, guests, saving, saved, errorMsg } = this.state;
     const canAddPlusOne = !!(invite && invite.allow_plus_one) && guests.length < 2;
+    const gateActive = !!token && !!invite && !notFound && !loading;
+    const showApero = !gateActive || invite.invited_apero;
+    const showWedding = !gateActive || invite.invited_wedding;
+    const showPaella = !gateActive || invite.invited_paella;
     const guestVals = guests.map((g, idx) => ({
       ...g,
       legend: g.is_primary ? (fr ? "Vous" : "You") : (fr ? "Invité·e (+1)" : "Guest (+1)"),
@@ -586,6 +596,9 @@ class Component extends DCLogic {
       invitedApero: !!(invite && invite.invited_apero),
       invitedWedding: !!(invite && invite.invited_wedding),
       invitedPaella: !!(invite && invite.invited_paella),
+      showApero,
+      showWedding,
+      showPaella,
       saving,
       saved,
       errorMsg,
