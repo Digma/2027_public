@@ -118,6 +118,26 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
   </div>
 </header>
 
+<section id="apercu" style="padding:clamp(26px,3.6vw,46px) var(--m) 0">
+  <div data-g12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g)">
+    <span data-span style="grid-column:1 / span 2;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En bref</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">At a glance</sc-if></span>
+    <div data-span style="grid-column:4 / span 6;display:flex;flex-direction:column">
+      <sc-if value="{{ showApero }}">
+      <a href="#programme" style="display:grid;grid-template-columns:minmax(44px,auto) minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="grid-row:span 2;font-family:Anton,Impact,sans-serif;font-size:clamp(30px,2.6vw,40px);line-height:.9;color:var(--violet)">14</span><span style="font-family:Archivo,Helvetica,sans-serif;font-weight:600;font-size:clamp(16.5px,1.2vw,19px)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Apéro au musée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Drinks at the museum</sc-if></span><span style="grid-row:span 2;font-family:'Space Mono',monospace;color:var(--violet)">→</span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ven. · Cérès Franco · 18h – 21h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fri · Cérès Franco · 6pm – 9pm</sc-if></span></a>
+      </sc-if>
+      <sc-if value="{{ showWedding }}">
+      <a href="#programme" style="display:grid;grid-template-columns:minmax(44px,auto) minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="grid-row:span 2;font-family:Anton,Impact,sans-serif;font-size:clamp(30px,2.6vw,40px);line-height:.9;color:var(--violet)">15</span><span style="font-family:Archivo,Helvetica,sans-serif;font-weight:600;font-size:clamp(16.5px,1.2vw,19px)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Le mariage</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The wedding</sc-if></span><span style="grid-row:span 2;font-family:'Space Mono',monospace;color:var(--violet)">→</span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Sam. · 14h mairie · 15h30 cérémonie</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sat · 2pm town hall · 3:30pm ceremony</sc-if></span></a>
+      </sc-if>
+      <sc-if value="{{ showPaella }}">
+      <a href="#programme" style="display:grid;grid-template-columns:minmax(44px,auto) minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="grid-row:span 2;font-family:Anton,Impact,sans-serif;font-size:clamp(30px,2.6vw,40px);line-height:.9;color:var(--violet)">16</span><span style="font-family:Archivo,Helvetica,sans-serif;font-weight:600;font-size:clamp(16.5px,1.2vw,19px)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">La paella</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The paella</sc-if></span><span style="grid-row:span 2;font-family:'Space Mono',monospace;color:var(--violet)">→</span><span style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Dim. · Manufacture Royale · 13h – 19h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Sun · Manufacture Royale · 1pm – 7pm</sc-if></span></a>
+      </sc-if>
+      <sc-if value="{{ showIcs }}">
+      <a href="{{ icsHref }}" style="margin-top:14px;align-self:flex-start;display:inline-flex;align-items:center;gap:14px;min-height:46px;padding:0 18px;border:1px solid var(--violet);color:var(--violet);font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase" style-hover="background:var(--violet);color:#fff"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ajouter à mon agenda</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Add to my calendar</sc-if><span aria-hidden="true">+</span></a>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
 <section id="sommaire" style="padding:clamp(26px,3.6vw,46px) var(--m) 0">
   <div data-g12 style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g)">
     <span data-span style="grid-column:1 / span 2;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Sommaire</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Contents</sc-if></span>
@@ -678,6 +698,8 @@ class Component extends DCLogic {
       showApero,
       showWedding,
       showPaella,
+      showIcs: !!(showApero || showWedding || showPaella),
+      icsHref: "calendar/clara-gael-" + (showApero ? "a" : "") + (showWedding ? "w" : "") + (showPaella ? "p" : "") + ".ics",
       showRsvp: !!token,
       faqNum: token ? "07" : "06",
       saving,

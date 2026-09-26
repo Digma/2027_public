@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//claraetgael.love//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Clara & Gaël
+BEGIN:VEVENT
+UID:apero-2027@claraetgael.love
+DTSTAMP:20260926T000000Z
+DTSTART:20270514T160000Z
+DTEND:20270514T190000Z
+SUMMARY:Clara & Gaël · Apéro
+LOCATION:La Coopérative-Musée Cérès Franco\, 5 Rte d'Alzonne\, 11170 Mo
+ ntolieu\, France
+DESCRIPTION:Apéro au musée Cérès Franco / Drinks at the museum / Aperit
+ ivo en el museo\nhttps://claraetgael.love
+URL:https://claraetgael.love
+END:VEVENT
+BEGIN:VEVENT
+UID:mariage-2027@claraetgael.love
+DTSTAMP:20260926T000000Z
+DTSTART:20270515T120000Z
+DTEND:20270516T020000Z
+SUMMARY:Clara & Gaël · Mariage
+LOCATION:Mairie de Montolieu\, 8 Rue de la Mairie\, 11170 Montolieu\, Franc
+ e
+DESCRIPTION:14h rendez-vous à la mairie · 15h30 cérémonie à Saint-Roch
+  · 18h vin d'honneur & dîner\n2pm meet at the town hall · 3:30pm ceremo
+ ny · 6pm drinks & dinner\n14h encuentro en el ayuntamiento · 15h30 cerem
+ onia · 18h cóctel y cena\nhttps://claraetgael.love
+URL:https://claraetgael.love
+END:VEVENT
+END:VCALENDAR
