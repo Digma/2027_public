@@ -459,6 +459,28 @@ function getSb() {
   }
   return _sbClient;
 }
+// Language priority: ?lang= in the URL (usable in invite links), then the
+// visitor's last explicit choice, then the browser's preferred languages.
+// Anyone whose browser doesn't prefer French gets English.
+const LANG_KEY = "cg-lang";
+function detectLang(fallback) {
+  const fromUrl = new URLSearchParams(window.location.search).get("lang");
+  if (fromUrl === "fr" || fromUrl === "en") return fromUrl;
+  try {
+    const saved = window.localStorage.getItem(LANG_KEY);
+    if (saved === "fr" || saved === "en") return saved;
+  } catch (e) {}
+  const prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+  for (const l of prefs) {
+    const code = String(l).slice(0, 2).toLowerCase();
+    if (code === "fr") return "fr";
+    if (code === "en") return "en";
+  }
+  return prefs[0] ? "en" : fallback;
+}
+function rememberLang(lang) {
+  try { window.localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+}
 function emptyGuest(isPrimary) {
   return {
     id: null,
@@ -478,7 +500,7 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     this.state = {
-      lang: props.startLang === "en" ? "en" : "fr",
+      lang: detectLang(props.startLang === "en" ? "en" : "fr"),
       token: null,
       loading: false,
       notFound: false,
@@ -504,6 +526,7 @@ class Component extends DCLogic {
     s.setProperty("--rule", this.props.hairlines === false ? "transparent" : p.ink);
   }
   componentDidMount() {
+    document.documentElement.lang = this.state.lang;
     this.applyTheme();
     const params = new URLSearchParams(window.location.search);
     const token = params.get("rsvp");
@@ -611,8 +634,8 @@ class Component extends DCLogic {
       en: !fr,
       frBtn: this.langBtn(fr),
       enBtn: this.langBtn(!fr),
-      setFr: () => this.setState({ lang: "fr" }),
-      enBtn2: () => this.setState({ lang: "en" }),
+      setFr: () => { rememberLang("fr"); this.setState({ lang: "fr" }); },
+      enBtn2: () => { rememberLang("en"); this.setState({ lang: "en" }); },
       token,
       loading,
       notFound,
