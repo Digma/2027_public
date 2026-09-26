@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//claraetgael.love//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Clara & Gaël
+BEGIN:VEVENT
+UID:paella-2027@claraetgael.love
+DTSTAMP:20260926T000000Z
+DTSTART:20270516T110000Z
+DTEND:20270516T170000Z
+SUMMARY:Clara & Gaël · Paella
+LOCATION:La Manufacture Royale 1739\, 16 Imp. de la Manufacture\, 11170 Mon
+ tolieu\, France
+DESCRIPTION:Paella à la Manufacture Royale / Paella at the Manufacture Roy
+ ale\nhttps://claraetgael.love
+URL:https://claraetgael.love
+END:VEVENT
+END:VCALENDAR

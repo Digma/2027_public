@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//claraetgael.love//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Clara & Gaël
+BEGIN:VEVENT
+UID:apero-2027@claraetgael.love
+DTSTAMP:20260926T000000Z
+DTSTART:20270514T160000Z
+DTEND:20270514T190000Z
+SUMMARY:Clara & Gaël · Apéro
+LOCATION:La Coopérative-Musée Cérès Franco\, 5 Rte d'Alzonne\, 11170 Mo
+ ntolieu\, France
+DESCRIPTION:Apéro au musée Cérès Franco / Drinks at the museum / Aperit
+ ivo en el museo\nhttps://claraetgael.love
+URL:https://claraetgael.love
+END:VEVENT
+END:VCALENDAR
