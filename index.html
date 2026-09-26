@@ -520,9 +520,9 @@ class Component extends DCLogic {
     s.setProperty("--rule", this.props.hairlines === false ? "transparent" : p.ink);
   }
   componentDidMount() {
+    this.applyTheme();
     const splash = document.getElementById("splash");
     if (splash) splash.remove();
-    this.applyTheme();
     const params = new URLSearchParams(window.location.search);
     const token = params.get("rsvp");
     if (!token) return;
