@@ -50,7 +50,9 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
       <span style="opacity:.5">/</span>
       <button type="button" onClick="{{ enBtn2 }}" style="{{ enBtn }}">EN</button>
     </div>
+    <sc-if value="{{ showRsvp }}">
     <a href="#rsvp" style="background:var(--violet);color:#fff;padding:0 16px;min-height:32px;display:inline-flex;align-items:center;letter-spacing:.18em" style-hover="background:var(--ink)">RSVP</a>
+    </sc-if>
   </div>
 </nav>
 
@@ -95,8 +97,10 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
       <a href="#dormir" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">03</span><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Où dormir</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Where to stay</sc-if></span><span style="color:var(--violet)">→</span></a>
       <a href="#look" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">04</span><span>Dress code</span><span style="color:var(--violet)">→</span></a>
       <a href="#photos" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">05</span><span>Images</span><span style="color:var(--violet)">→</span></a>
+      <sc-if value="{{ showRsvp }}">
       <a href="#rsvp" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">06</span><span>RSVP</span><span style="color:var(--violet)">→</span></a>
-      <a href="#faq" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">07</span><span>FAQ</span><span style="color:var(--violet)">→</span></a>
+      </sc-if>
+      <a href="#faq" style="display:grid;grid-template-columns:34px 1fr auto;gap:12px;padding:7px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);color:var(--ink)" style-hover="color:var(--violet)"><span style="color:var(--dim)">{{ faqNum }}</span><span>FAQ</span><span style="color:var(--violet)">→</span></a>
     </div>
   </div>
 </section>
@@ -121,9 +125,11 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     </div>
     <div data-span style="grid-column:11 / -1;display:flex;flex-direction:column;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase">
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Lieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Venue</sc-if></span>
-      <span style="padding-bottom:10px">Musée Cérès Franco</span>
+      <span>La Coopérative-Musée Cérès Franco</span>
+      <span style="color:var(--dim);text-transform:none;letter-spacing:.04em;line-height:1.5;padding-top:4px">5 Rte d'Alzonne, 11170 Montolieu</span>
+      <a href="https://maps.app.goo.gl/KKJZJUtBcfCCd5Xu9" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:32px;padding-bottom:6px;color:var(--violet)" style-hover="color:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Itinéraire ↗</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Directions ↗</sc-if></a>
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Heure</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Time</sc-if></span>
-      <span style="padding-bottom:10px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">En soirée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Evening</sc-if></span>
+      <span style="padding-bottom:10px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">18h – 21h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">6pm – 9pm</sc-if></span>
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Tenue</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Dress</sc-if></span>
       <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Libre</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">As you are</sc-if></span>
     </div>
@@ -149,8 +155,13 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
       <p style="margin:0;max-width:56ch;font-size:clamp(16.5px,1.15vw,18.5px);line-height:1.6;color:var(--dim);text-wrap:pretty"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Cérémonie à la chapelle Saint-Roch, sur la colline au-dessus du village. Tout le monde redescend ensuite à la Manufacture Royale : dîner, discours non relus, danse jusqu'à tard.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Ceremony at the Saint-Roch chapel, on the hill above the village. Everyone walks back down to the Manufacture Royale: dinner, unrehearsed speeches, dancing until late.</sc-if></p>
       <div style="display:flex;flex-wrap:wrap;gap:8px 32px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:12px 0;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)">
         <span>Chapelle Saint-Roch → Manufacture Royale</span>
-        <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Après-midi &amp; soirée</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Afternoon &amp; evening</sc-if></span>
+        <span style="color:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">14h – 4h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">2pm – 4am</sc-if></span>
         <a href="#look" style="color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Voir dress code</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">See dress code</sc-if></a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase">
+        <span style="color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Rendez-vous</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Meeting point</sc-if></span>
+        <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Mairie de Montolieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu town hall</sc-if> <span style="color:var(--dim);text-transform:none;letter-spacing:.04em">— 8 Rue de la Mairie, 11170 Montolieu</span></span>
+        <a href="https://maps.app.goo.gl/MWb2XcpeJqGrmjPF8" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:32px;color:var(--violet)" style-hover="color:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Itinéraire ↗</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Directions ↗</sc-if></a>
       </div>
       <p style="margin:0;display:flex;gap:10px;font-family:'Bodoni Moda',Didot,Georgia,serif;font-style:italic;font-size:clamp(16px,1.5vw,20px);color:var(--violet)"><span style="font-family:'Space Mono',monospace;font-style:normal">↳</span><span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">La montée à la chapelle se fait à pied, doucement.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">The climb up to the chapel is on foot, slowly.</sc-if></span></p>
     </div>
@@ -184,9 +195,11 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     </div>
     <div data-span style="grid-column:11 / -1;display:flex;flex-direction:column;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase">
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Lieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Venue</sc-if></span>
-      <span style="padding-bottom:10px">Manufacture Royale</span>
+      <span>La Manufacture Royale 1739</span>
+      <span style="color:var(--dim);text-transform:none;letter-spacing:.04em;line-height:1.5;padding-top:4px">16 Imp. de la Manufacture, 11170 Montolieu</span>
+      <a href="https://maps.app.goo.gl/uwHxwrr75qdNBkje8" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;min-height:32px;padding-bottom:6px;color:var(--violet)" style-hover="color:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Itinéraire ↗</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Directions ↗</sc-if></a>
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Heure</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Time</sc-if></span>
-      <span style="padding-bottom:10px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Midi &amp; après-midi</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Noon &amp; afternoon</sc-if></span>
+      <span style="padding-bottom:10px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">14h – 19h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">2pm – 7pm</sc-if></span>
       <span style="color:var(--dim);border-top:1px solid var(--rule);padding:8px 0 3px"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Lundi</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Monday</sc-if></span>
       <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Férié</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Public holiday</sc-if></span>
     </div>
@@ -305,6 +318,7 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
   </div>
 </section>
 
+<sc-if value="{{ showRsvp }}">
 <section id="rsvp" style="padding:clamp(44px,6.4vw,96px) var(--m) 0">
   <div data-g12 data-sectionrule style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--g);border-top:1px solid var(--rule);padding-top:clamp(20px,3vw,40px)">
     <div data-span style="grid-column:1 / span 5;display:flex;flex-direction:column;gap:16px">
@@ -323,9 +337,6 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Formulaire de réponse</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Reply form</sc-if></span>
         <span style="opacity:.75">2 min</span>
       </div>
-      <sc-if value="{{ !token }}">
-        <p style="margin:0;font-size:15px;line-height:1.6;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ce formulaire utilise un lien personnel. Merci d'utiliser le lien reçu par email pour répondre.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">This form needs your personal invite link. Please use the link sent to you by email to reply.</sc-if></p>
-      </sc-if>
       <sc-if value="{{ token }}">
         <sc-if value="{{ loading }}">
           <p style="margin:0;font-size:15px;color:var(--dim)">{{ loadingMsg }}</p>
@@ -379,10 +390,11 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
     </form>
   </div>
 </section>
+</sc-if>
 
 <section id="faq" style="padding:clamp(44px,6.4vw,96px) var(--m) clamp(36px,5vw,72px)">
   <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:clamp(14px,2vw,26px)">
-    <span style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;color:var(--dim)">07</span>
+    <span style="font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;color:var(--dim)">{{ faqNum }}</span>
     <h2 style="margin:0;font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(32px,4.6vw,62px);line-height:.92;letter-spacing:-.01em;text-transform:uppercase">FAQ</h2>
   </div>
   <div style="display:flex;flex-direction:column;border-top:1px solid var(--rule)">
@@ -599,6 +611,8 @@ class Component extends DCLogic {
       showApero,
       showWedding,
       showPaella,
+      showRsvp: !!token,
+      faqNum: token ? "07" : "06",
       saving,
       saved,
       errorMsg,
