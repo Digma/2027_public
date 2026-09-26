@@ -188,6 +188,11 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         <span style="color:var(--ink)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">14h – 4h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">2pm – 4am</sc-if></span>
         <a href="#look" style="color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Voir dress code</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">See dress code</sc-if></a>
       </div>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px 24px;font-family:'Space Mono',monospace;font-size:12.5px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase">
+        <li style="display:flex;flex-direction:column;gap:6px"><span style="font-family:Anton,Impact,sans-serif;font-size:clamp(24px,2.2vw,32px);line-height:1;letter-spacing:0;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">14h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">2pm</sc-if></span><span style="color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Rendez-vous à la mairie</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Meet at the town hall</sc-if></span></li>
+        <li style="display:flex;flex-direction:column;gap:6px"><span style="font-family:Anton,Impact,sans-serif;font-size:clamp(24px,2.2vw,32px);line-height:1;letter-spacing:0;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">15h30</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">3:30pm</sc-if></span><span style="color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Cérémonie à Saint-Roch</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Ceremony at Saint-Roch</sc-if></span></li>
+        <li style="display:flex;flex-direction:column;gap:6px"><span style="font-family:Anton,Impact,sans-serif;font-size:clamp(24px,2.2vw,32px);line-height:1;letter-spacing:0;color:var(--violet)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">18h</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">6pm</sc-if></span><span style="color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Vin d'honneur &amp; dîner</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Drinks reception &amp; dinner</sc-if></span></li>
+      </ol>
       <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase">
         <span style="color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Rendez-vous</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Meeting point</sc-if></span>
         <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Mairie de Montolieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Montolieu town hall</sc-if> <span style="color:var(--dim);text-transform:none;letter-spacing:.04em">— 8 Rue de la Mairie, 11170 Montolieu</span></span>
@@ -294,9 +299,9 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         <span style="padding:9px 0;border-bottom:1px solid var(--rule)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Groupes — une grande maison à plusieurs</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Groups — one big house together</sc-if></span>
       </div>
     </div>
-    <figure data-span style="grid-column:7 / -1;margin:0">
-      <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:rgba(20,18,16,.06)">
-        <img src="photos/stay-1.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <figure data-span style="grid-column:8 / -1;margin:0">
+      <div style="position:relative;aspect-ratio:1;overflow:hidden;background:rgba(20,18,16,.06)">
+        <img src="photos/stay-1.jpg" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%">
       </div>
       <figcaption style="margin-top:10px;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Fig. 4 — Place du village de Montolieu</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Fig. 4 — Montolieu's village square</sc-if></figcaption>
     </figure>
@@ -362,7 +367,7 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         <span style="padding-bottom:10px"><a href="mailto:info@claraetgael.love" style="color:var(--violet)">info@claraetgael.love</a></span>
       </div>
     </div>
-    <form onSubmit="{{ onSubmit }}" data-span style="grid-column:7 / -1;display:flex;flex-direction:column;gap:18px;border:1px solid var(--violet);padding:clamp(18px,2.2vw,32px)">
+    <form onSubmit="{{ onSubmit }}" data-span style="grid-column:7 / -1;align-self:start;display:flex;flex-direction:column;gap:18px;border:1px solid var(--violet);padding:clamp(18px,2.2vw,32px)">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:calc(clamp(18px,2.2vw,32px) * -1) calc(clamp(18px,2.2vw,32px) * -1) 0;background:var(--violet);color:#fff;padding:10px clamp(18px,2.2vw,32px);font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase">
         <span><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Formulaire de réponse</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Reply form</sc-if></span>
         <span style="opacity:.75">2 min</span>
@@ -373,7 +378,11 @@ input,textarea,button{font-family:inherit;box-sizing:border-box;max-width:100%}
         </sc-if>
         <sc-if value="{{ !loading }}">
           <sc-if value="{{ notFound }}">
-            <p style="margin:0;font-size:15px;line-height:1.6;color:var(--dim)">{{ notFoundMsg }}</p>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <p style="margin:0;font-family:'Bodoni Moda',Didot,Georgia,serif;font-style:italic;font-size:clamp(19px,1.7vw,24px);line-height:1.3"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Ce lien ne fonctionne pas.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">This link doesn't work.</sc-if></p>
+              <p style="margin:0;font-size:15.5px;line-height:1.6;color:var(--dim)"><sc-if value="{{ fr }}" hint-placeholder-val="{{ true }}">Vérifiez qu'il a été copié en entier depuis votre invitation. Sinon, écrivez-nous : on vous renvoie le bon.</sc-if><sc-if value="{{ en }}" hint-placeholder-val="{{ false }}">Check it was copied in full from your invitation. Otherwise, write to us and we'll send you the right one.</sc-if></p>
+              <a href="mailto:info@claraetgael.love?subject=RSVP" style="align-self:flex-start;display:inline-flex;align-items:center;min-height:48px;padding:0 22px;background:var(--violet);color:#fff;font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase" style-hover="background:var(--ink)">info@claraetgael.love</a>
+            </div>
           </sc-if>
           <sc-if value="{{ !notFound }}">
             <sc-for list="{{ guests }}" as="item">
@@ -677,7 +686,6 @@ class Component extends DCLogic {
       saveLabel: saving ? (fr ? "Envoi…" : "Sending…") : (fr ? "Envoyer" : "Send"),
       savedMsg: fr ? "Merci, c'est enregistré !" : "Thanks, saved!",
       loadingMsg: fr ? "Chargement…" : "Loading…",
-      notFoundMsg: fr ? "Lien invalide. Contactez-nous." : "Invalid link. Please contact us.",
       onSubmit: (e) => this.handleSubmit(e)
     };
   }
