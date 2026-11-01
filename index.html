@@ -570,11 +570,32 @@ class Component extends DCLogic {
     s.setProperty("--violet", p.violet);
     s.setProperty("--rule", this.props.hairlines === false ? "transparent" : p.ink);
   }
+  // The page is rendered client-side, so the browser's own #anchor jump runs before the
+  // target exists. Jump once rendered, then again when fonts/the invite have shifted layout,
+  // unless the visitor has already scrolled away.
+  scrollToHash() {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    let userScrolled = false;
+    const stop = () => { userScrolled = true; };
+    window.addEventListener("wheel", stop, { once: true, passive: true });
+    window.addEventListener("touchmove", stop, { once: true, passive: true });
+    const jump = () => {
+      const el = document.getElementById(id);
+      if (el && !userScrolled) el.scrollIntoView({ behavior: "auto", block: "start" });
+    };
+    jump();
+    requestAnimationFrame(jump);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+    window.addEventListener("load", jump, { once: true });
+    setTimeout(jump, 1200);
+  }
   componentDidMount() {
     document.documentElement.lang = this.state.lang;
     this.applyTheme();
     const splash = document.getElementById("splash");
     if (splash) splash.remove();
+    this.scrollToHash();
     const params = new URLSearchParams(window.location.search);
     const token = params.get("rsvp");
     if (!token) return;
