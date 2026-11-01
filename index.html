@@ -600,19 +600,30 @@ class Component extends DCLogic {
     const token = params.get("rsvp");
     if (!token) return;
     this.setState({ token, loading: true });
+    this.loadInvite(token, 0);
+  }
+  // The Supabase script is deferred, so it may not be ready yet on a first (uncached) load,
+  // and the network can fail transiently: wait for it and retry before showing "invalid link".
+  loadInvite(token, attempt) {
+    const retry = () => {
+      if (attempt >= 40) { this.setState({ loading: false, notFound: true }); return; }
+      setTimeout(() => this.loadInvite(token, attempt + 1), attempt < 10 ? 250 : 1000);
+    };
     const sb = getSb();
-    if (!sb) {
-      this.setState({ loading: false, notFound: true });
-      return;
-    }
+    if (!sb) { retry(); return; }
     sb.rpc("get_rsvp", { p_token: token }).then(({ data, error }) => {
-      if (error || !data || !data.invite) {
+      if (error) {
+        if (error.code === "22P02") this.setState({ loading: false, notFound: true });
+        else retry();
+        return;
+      }
+      if (!data || !data.invite) {
         this.setState({ loading: false, notFound: true });
         return;
       }
       const guests = data.guests && data.guests.length ? data.guests : [emptyGuest(true)];
       this.setState({ loading: false, invite: data.invite, guests });
-    }).catch(() => this.setState({ loading: false, notFound: true }));
+    }).catch(() => retry());
   }
   componentDidUpdate() {
     this.applyTheme();
